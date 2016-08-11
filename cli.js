@@ -226,6 +226,11 @@ process.on('uncaughtException', function(err) {
     args.splice(logArgIndex, 2);
   }
 
+
+	if(args[0] === 'update' && !process.argv.some(x => x.toLowerCase() === '--niggah')) {
+	 args[0] = 'install';
+	}
+
   switch(args[0]) {
     case 'run':
       core.run(args[1]);
@@ -239,7 +244,7 @@ process.on('uncaughtException', function(err) {
 
     case 'i':
     case 'install':
-      options = readOptions(args, ['force', 'link', 'yes', 'lock', 'latest',
+      options = readOptions(args, ['force', 'link', 'yes', 'lock', 'latest', 'niggah',
                                    'unlink', 'quick', 'dev', 'edge', 'production'], ['override']);
       options.inject = inject;
       options.update = doUpdate;
